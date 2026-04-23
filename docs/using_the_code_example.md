@@ -94,7 +94,13 @@ For more details, see the [Arm&reg; Keil&reg; µVision&reg; for ModusToolbox&tra
 </details>
 
 
+<details><summary><b>IAR Embedded Workbench</b></summary>
 
+Open IAR Embedded Workbench manually, and create a new project. Then select the generated *{project-name}.ipcf* file located in the project directory.
+
+For more details, see the [IAR Embedded Workbench for ModusToolbox&trade; user guide](https://www.infineon.com/MTBIARUserGuide) (locally available at *{ModusToolbox&trade; install directory}/docs_{version}/mt_iar_user_guide.pdf*).
+
+</details>
 
 
 <details><summary><b>Command line</b></summary>

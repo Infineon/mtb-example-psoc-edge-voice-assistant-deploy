@@ -33,8 +33,8 @@ TARGET=KIT_PSE84_EVAL_EPC2
 
 # Name of toolchain to use. Options include:
 #
-# ARM     	-- ARM Compiler (must be installed separately)
-# LLVM_ARM	-- LLVM Embedded Toolchain (must be installed separately)
+# ARM         -- ARM Compiler (must be installed separately)
+# LLVM_ARM    -- LLVM Embedded Toolchain (must be installed separately)
 #
 # See also: CY_COMPILER_PATH below
 TOOLCHAIN=LLVM_ARM
@@ -47,7 +47,7 @@ TOOLCHAIN=LLVM_ARM
 # 
 # If CONFIG is manually edited, ensure to update or regenerate 
 # launch configurations for your IDE.
-CONFIG=Debug
+CONFIG=Release
 
 MTB_SUPPORTED_TOOLCHAINS?=LLVM_ARM ARM
 
@@ -78,5 +78,12 @@ CONFIG_VOICE_CORE_MODE=LIMITED
 # LED_Demo          -- use the LED demo model
 # Cooktop_Demo      -- use the cooktop demo model
 DEEPCRAFT_PROJECT_NAME=Smart_Lights_Demo
+
+# Option to enable Voice ID
+#
+# ENABLED  - Enable Voice ID
+# DISABLED - Disable Voice ID 
+#
+CONFIG_VOICE_ID=DISABLED
 
 include ../common_app.mk

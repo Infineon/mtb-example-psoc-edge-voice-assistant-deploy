@@ -17,7 +17,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright (c) (2025), Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright (c) (2026), Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.
 * SPDX-License-Identifier: Apache-2.0
 *
@@ -127,7 +127,25 @@ SECTIONS
         /* Read only code (constants) */
         *(.rodata .rodata.* .constdata .constdata.* .conststring .conststring.*)
         /* Exclude certain files from this section as they will be placed in RAM */
-        *(EXCLUDE_FILE(*cy_syslib.* *cy_syslib_ext.* *cy_smif.* *cy_smif_memnum.* *cy_smif_memslot.* *cy_smif_sfdp.* *cy_smif_hb_flash.* *cyhal_qspi.* *mtb_hal_memoryspi.* *mtb_serial_memory.* *freertos/Source*.* *cy_clib_support*.* *cy_mutex_pool*.* *cy_time.* *cyabs_*.* *cy_worker_thread.* *cmsis*.* *ifx_va*.* *sp_enh*.*) .text*)
+        *(EXCLUDE_FILE(*cy_syslib.*
+        *cy_syslib_ext.*
+        *cy_smif.* 
+        *cy_smif_memnum.* 
+        *cy_smif_memslot.* 
+        *cy_smif_sfdp.* 
+        *cy_smif_hb_flash.* 
+        *cyhal_qspi.* 
+        *mtb_hal_memoryspi.* 
+        *mtb_serial_memory.* 
+        *freertos/Source*.* 
+        *cy_clib_support*.* 
+        *cy_mutex_pool*.* 
+        *cy_time.* 
+        *cyabs_*.* 
+        *cy_worker_thread.* 
+        *cmsis*.* 
+        *ifx_va*.* 
+        *sp_enh*.*) .text*)
 
         . = ALIGN(4);
 
@@ -215,8 +233,12 @@ SECTIONS
         *cmsis*.*(.text*)
         
         /* Voice/Audio related libraries */
-        *ifx_va*.*(.text*)
-        *sp_enh*.*(.text*)
+        *ifx_va.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
+        *sp_enh.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
+                
+        *libusbd_base_d_cm55f_llvm_arm.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
+        *libusbd_base_r_cm55f_llvm_arm.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
+        
 
         . = ALIGN(4);
     } > m55_code_INTERNAL AT > m55_nvm_sel
@@ -282,6 +304,12 @@ SECTIONS
         . = ALIGN(4);
 
         KEEP(*(.cy_dtcm))
+
+        . = ALIGN(4);
+        
+        . = ALIGN(4);
+
+        KEEP(*(.dtcm_data))
 
         . = ALIGN(4);
 
@@ -359,7 +387,7 @@ SECTIONS
     {
         __bss_start__ = .;
 
-        *(.bss*)
+       /* *(.bss*) */
         *(COMMON)
 
         . = ALIGN(4);
@@ -395,6 +423,7 @@ SECTIONS
         *(.wwd_nlu_data4)
         *(.wwd_nlu_data5)
         *(.wwd_nlu_data6)
+        *(.bss*)
 
         . = ALIGN(4);
     }  > m55_data_secondary AT > m55_nvm_sel

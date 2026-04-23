@@ -22,7 +22,7 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright (c) (2020-2025), Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright (c) (2020-2026), Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.
 * SPDX-License-Identifier: Apache-2.0
 *
@@ -105,8 +105,10 @@ LR_XIP_PORT0 (CYMEM_CM55_0_m55_nvm_sel_START + MCUBOOT_HEADER_SIZE) (CYMEM_CM55_
     *cmsis*.* (+RO)
     
     /* Voice/Audio related libraries */
-    *ifx_va*.* (+RO)
-    *sp_enh*.* (+RO)
+    *ifx_va* (+RO, +RW, +ZI)
+    *sp_enh* (+RO +RW +ZI)
+    *libusbd_base_d_cm55f_armc6* (+RO, +RW, +ZI)
+    *libusbd_base_r_cm55f_armc6* (+RO, +RW, +ZI)
   }
 
   /* The execution region for less performance-sensitive or critical functions that might be executed in SOC memory */
@@ -120,6 +122,9 @@ LR_XIP_PORT0 (CYMEM_CM55_0_m55_nvm_sel_START + MCUBOOT_HEADER_SIZE) (CYMEM_CM55_
   {
     *(.cy_dtcm)
     .ANY (+RW +ZI)
+    . = ALIGN(4);
+    *(.dtcm_data)
+    . = ALIGN(4);
   }
 
   /* A section for initialized data in SOC memory */
@@ -133,6 +138,8 @@ LR_XIP_PORT0 (CYMEM_CM55_0_m55_nvm_sel_START + MCUBOOT_HEADER_SIZE) (CYMEM_CM55_
     *(.wwd_nlu_data4)
     *(.wwd_nlu_data5)
     *(.wwd_nlu_data6)
+    *(.bss)
+    *(.bss.*)
   }
 
   /* A region for shared RAM memory where only the Cortex-M55 can allocate data but all cores can access*/
@@ -176,12 +183,12 @@ LR_DTCM CYMEM_CM55_0_m55_data_INTERNAL_START CYMEM_CM55_0_m55_data_SIZE
     *(.bss.noinit)
   }
 
-  /* A section for non-initialized data memory */
+  /* A section for non-initialized data memory
   bss +0 ALIGN 8 (CYMEM_CM55_0_m55_data_SIZE - AlignExpr(ImageLength(app_data_main), 8) - AlignExpr(ImageLength(noinit), 8))
   {
-    *(.bss)
-    *(.bss.*)
-  }
+    ;*(.bss)
+    ;*(.bss.*)
+  } */
 
   /* A region for stack */
   ARM_LIB_STACK __STACK_TOP EMPTY -__STACK_SIZE
