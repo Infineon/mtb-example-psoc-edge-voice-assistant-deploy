@@ -145,7 +145,10 @@ SECTIONS
         *cy_worker_thread.* 
         *cmsis*.* 
         *ifx_va*.* 
-        *sp_enh*.*) .text*)
+        *sp_enh*.*
+        *libusbd_base_d_cm55f_llvm_arm*.*
+        *libusbd_base_r_cm55f_llvm_arm*.*
+        ) .text*)
 
         . = ALIGN(4);
 
@@ -204,6 +207,9 @@ SECTIONS
         LONG(__bss_start__)                       /* Start of the zero-initialized data section */
         LONG((__bss_end__ - __bss_start__)/4)     /* Size of the zero-initialized data section in words */
 
+        LONG(__itcm_bss_start__)                   /* Start of the ITCM BSS section (Voice/Audio libs) */
+        LONG((__itcm_bss_end__ - __itcm_bss_start__)/4) /* Size in words */
+
         __zero_table_end__ = .;
     } > m55_nvm_sel
 
@@ -232,16 +238,28 @@ SECTIONS
         *cy_worker_thread.*(.text*)
         *cmsis*.*(.text*)
         
-        /* Voice/Audio related libraries */
-        *ifx_va.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
-        *sp_enh.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
+        /* Voice/Audio related libraries - include .data* to match ARM scatter (+RO +RW +ZI) */
+        *ifx_va.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring* .data .data*)
+        *sp_enh.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring* .data .data*)
                 
-        *libusbd_base_d_cm55f_llvm_arm.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
-        *libusbd_base_r_cm55f_llvm_arm.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring*)
+        *libusbd_base_d_cm55f_llvm_arm.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring* .data .data*)
+        *libusbd_base_r_cm55f_llvm_arm.*(.text* .rodata .rodata* .constdata .constdata* .conststring .conststring* .data .data*)
         
 
         . = ALIGN(4);
     } > m55_code_INTERNAL AT > m55_nvm_sel
+
+    /* BSS from Voice/Audio and USB libraries - placed in ITCM to match ARM scatter file (+ZI) */
+    .app_code_itcm_bss (NOLOAD) : ALIGN(4)
+    {
+        __itcm_bss_start__ = .;
+        *ifx_va.*(.bss .bss.*)
+        *sp_enh.*(.bss .bss.*)
+        *libusbd_base_d_cm55f_llvm_arm.*(.bss .bss.*)
+        *libusbd_base_r_cm55f_llvm_arm.*(.bss .bss.*)
+        . = ALIGN(4);
+        __itcm_bss_end__ = .;
+    } > m55_code_INTERNAL
 
     /* A section for the vector table */
     .ram_vectors (NOLOAD) : ALIGN(VECTORS_ALIGNMENT)
