@@ -71,6 +71,9 @@ COMPONENTS +=MW_MDL_DSNS MW_MDL_DSES
 ifeq (APP_KIT_PSE84_AI, $(TARGET))
     DEFINES+=USE_KIT_PSE84_AI
 endif 
+ifeq (APP_KIT_PSE84_HMI, $(TARGET))
+    DEFINES+=USE_KIT_PSE84_HMI
+endif 
 
 # Like COMPONENTS, but disable optional code that was enabled by default.
 DISABLE_COMPONENTS=

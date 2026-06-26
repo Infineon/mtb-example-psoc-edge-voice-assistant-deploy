@@ -82,6 +82,17 @@ lfs_t lfs;
 cy_rslt_t ifx_storage_init(void) {
     cy_rslt_t result = CY_RSLT_SUCCESS;
 
+#ifdef USE_KIT_PSE84_HMI
+   result = mtb_serial_memory_setup(
+        &serial_memory_obj,
+        MTB_SERIAL_MEMORY_CHIP_SELECT_0,
+        CYBSP_SMIF_CORE_0_XSPI_FLASH_hal_config.base,
+        CYBSP_SMIF_CORE_0_XSPI_FLASH_hal_config.clock,
+        &smif_mem_context,
+        &smif_mem_info,
+        &smif0BlockConfig);
+
+#else
    result = mtb_serial_memory_setup(
         &serial_memory_obj,
         MTB_SERIAL_MEMORY_CHIP_SELECT_1,
@@ -90,6 +101,7 @@ cy_rslt_t ifx_storage_init(void) {
         &smif_mem_context,
         &smif_mem_info,
         &smif0BlockConfig);
+#endif /* USE_KIT_PSE84_HMI */
 
     if (CY_RSLT_SUCCESS != result) {
         app_log_print("ERROR: mtb_serial_memory_setup returns error status!\r\n");
