@@ -74,7 +74,6 @@ INCLUDES+=
 # Add additional defines to the build process (without a leading -D).
 DEFINES+=CY_RETARGET_IO_CONVERT_LF_TO_CRLF
 
-# Select softfp or hardfp floating point. Default is softfp.
 VFP_SELECT+=
 
 # Additional / custom C compiler flags.

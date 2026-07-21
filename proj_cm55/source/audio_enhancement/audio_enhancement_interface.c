@@ -101,7 +101,9 @@ void license_limitation_exit()
 void audio_enhancement_process_output(ae_buffer_info_t *output_buffer)
 {
     
+#if defined(ENABLE_VOICE_ID) || defined(CY_AFE_ENABLE_TUNING_FEATURE)
     BaseType_t ret = pdTRUE;
+#endif /* ENABLE_VOICE_ID || CY_AFE_ENABLE_TUNING_FEATURE */
     int16_t * infer_buffer=output_buffer->output_buf;
     
     /* Use the output data from the audio enhancement with the voice-assistant */

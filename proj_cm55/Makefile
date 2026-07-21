@@ -155,8 +155,8 @@ ifeq (LIMITED, $(CONFIG_VOICE_CORE_MODE))
 endif
 
 
-# Select softfp or hardfp floating point. Default is softfp.
-VFP_SELECT+=
+# In this code example only hardfp is supported.
+VFP_SELECT+=hardfp
 
 # Additional / custom C compiler flags.
 #
