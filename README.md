@@ -12,7 +12,7 @@ This code example also supports identification of users with Voice ID. This feat
 
 [View this README on GitHub.](https://github.com/Infineon/mtb-example-psoc-edge-voice-assistant-deploy)
 
-[Provide feedback on this code example.](https://yourvoice.infineon.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDE0MTAiLCJTcGVjIE51bWJlciI6IjAwMi00MTQxMCIsIkRvYyBUaXRsZSI6IlBTT0MmdHJhZGU7IEVkZ2UgTUNVOiBERUVQQ1JBRlQmdHJhZGU7IFZvaWNlIEFzc2lzdGFudCBkZXBsb3ltZW50IiwicmlkIjoicm9kb2xmby5sb3NzaW9AaW5maW5lb24uY29tIiwiRG9jIHZlcnNpb24iOiIxLjUuMSIsIkRvYyBMYW5ndWFnZSI6IkVuZ2xpc2giLCJEb2MgRGl2aXNpb24iOiJNQ0QiLCJEb2MgQlUiOiJJQ1ciLCJEb2MgRmFtaWx5IjoiUFNPQyJ9)
+[Provide feedback on this code example.](https://yourvoice.infineon.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDE0MTAiLCJTcGVjIE51bWJlciI6IjAwMi00MTQxMCIsIkRvYyBUaXRsZSI6IlBTT0MmdHJhZGU7IEVkZ2UgTUNVOiBERUVQQ1JBRlQmdHJhZGU7IFZvaWNlIEFzc2lzdGFudCBkZXBsb3ltZW50IiwicmlkIjoicm9kb2xmby5sb3NzaW9AaW5maW5lb24uY29tIiwiRG9jIHZlcnNpb24iOiIxLjUuMiIsIkRvYyBMYW5ndWFnZSI6IkVuZ2xpc2giLCJEb2MgRGl2aXNpb24iOiJNQ0QiLCJEb2MgQlUiOiJJQ1ciLCJEb2MgRmFtaWx5IjoiUFNPQyJ9)
 
 See the [Design and implementation](docs/design_and_implementation.md) for the functional description of this code example.
 
@@ -148,6 +148,7 @@ Document title: *CE241410* – *PSOC&trade; Edge MCU: DEEPCRAFT&trade; voice ass
  1.4.0   | Added GeneratedSource to be available in the code by default and updated LLVM linker scripts
  1.5.0   | Added support for KIT_PSE84_HMI
  1.5.1   | Added minor fixes
+ 1.5.2   | ECO configurations update for KIT_PSE84_HMI
 <br>
 
 
